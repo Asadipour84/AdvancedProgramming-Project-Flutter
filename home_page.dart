@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'Account.dart';
+import 'Account_Icon.dart';
+import 'Account_Icon_Page.dart';
 class HomePage extends StatelessWidget {
   final String userName;
-  const HomePage({super.key, required this.userName});
-  Account _createRandomAccount() {
-    final random = Random();
-    String cardNumber =
-        List.generate(16, (_) => random.nextInt(10).toString()).join();
-    String password =
-        List.generate(4, (_) => random.nextInt(10).toString()).join();
-    return Account(cardNumber, password, 0.0);
-  }
+  final Account account;
+  const HomePage({super.key, required this.userName, required this.account});
   void _showComingSoon(BuildContext context, String title) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -22,7 +15,6 @@ class HomePage extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    final account = _createRandomAccount();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -41,49 +33,12 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               const SizedBox(height: 20),
-              Card(
-                elevation: 6,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Account Information',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text('Card Number: ${account.card_number}'),
-                      Text('Password: ${account.Pass_Word}'),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Balance: ${account.Balance.toStringAsFixed(0)} \$',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 30),
               const Text(
                 'Quick Access',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 15),
-
               Wrap(
                 spacing: 30,
                 runSpacing: 20,
@@ -97,7 +52,14 @@ class HomePage extends StatelessWidget {
                   _QuickIcon(
                     icon: Icons.account_balance,
                     title: 'Accounts',
-                    onTap: () => _showComingSoon(context, 'Accounts'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AccountPage(account: account),
+                        ),
+                      );
+                    },
                   ),
                   _QuickIcon(
                     icon: Icons.group,
@@ -111,15 +73,12 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 30),
               const Text(
                 'Services',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 15),
-
               Wrap(
                 spacing: 30,
                 runSpacing: 20,
