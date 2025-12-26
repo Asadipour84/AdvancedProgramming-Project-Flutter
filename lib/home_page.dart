@@ -49,18 +49,12 @@ class HomePage extends StatelessWidget {
                   _QuickIcon(
                     icon: Icons.person,
                     title: 'Profile',
-                    onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfilePage(
-                            userName: userName,
-                            account: account,
-                            // nationalCode: ??? (optional, see below)
-                          ),
-                        ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(userName: userName, account: account),
                       ),
-                    },
+                    ),
                   ),
                   _QuickIcon(
                     icon: Icons.account_balance,
