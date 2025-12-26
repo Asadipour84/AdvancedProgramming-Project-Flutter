@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Transfer.dart';
-
+import 'pdf_services.dart' ;
+import 'package:share_plus/share_plus.dart';
 class TransactionListPage extends StatelessWidget {
   const TransactionListPage({super.key});
 
@@ -10,9 +11,22 @@ class TransactionListPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transactions', style: TextStyle(color: Colors.white),),
+        title: const Text('Transactions'),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
-      ),
+        actions: [
+         IconButton(
+          icon: const Icon(Icons.download),
+          onPressed: () async {
+          final file =
+            await PdfService.generateTransactionPdf(transactions);
+            await Share.shareXFiles(
+                 [XFile(file.path)],
+                   text: 'Transaction Report',
+                  );
+              },
+            ),
+          ],
+        ),
       body: ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (context, index) {
