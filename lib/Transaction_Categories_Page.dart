@@ -17,6 +17,7 @@ class TransactionCategoriesPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Transaction Categories', style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
+        foregroundColor: Colors.white,
       ),
       body: ListView.builder(
         itemCount: Categories_Of_Transfer.values.length,

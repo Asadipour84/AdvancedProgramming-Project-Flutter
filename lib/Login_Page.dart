@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: const Text(
                     'Next Page',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
               ],

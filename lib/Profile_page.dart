@@ -42,6 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: const Text('Profile', style: TextStyle(color: Colors.white)),
         backgroundColor: ProfilePage.kAccent,
+        foregroundColor: Colors.white,
       ),
       body: Center(
         child: SingleChildScrollView(

@@ -10,6 +10,8 @@ class AccountPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Account Information', style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
+        // backgroundColor: EditProfilePage.kAccent,
+        foregroundColor: Colors.white,
       ),
       body: Center(
         child: SingleChildScrollView(

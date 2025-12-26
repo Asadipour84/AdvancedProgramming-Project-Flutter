@@ -11,6 +11,7 @@ class GroupsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Groups'),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
+        foregroundColor: Colors.white,
       ),
       body: Center(
         child: Wrap(
