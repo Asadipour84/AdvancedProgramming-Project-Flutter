@@ -1,6 +1,6 @@
-import 'package:first_part_authentication/Add_Member_Page.dart';
-import 'package:first_part_authentication/Create_Group_Page.dart';
-import 'package:first_part_authentication/Groups_List_Page.dart';
+import 'Add_Member_Page.dart';
+import 'Create_Group_Page.dart';
+import 'Groups_List_Page.dart';
 import 'package:flutter/material.dart';
 
 class GroupsPage extends StatelessWidget {

@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'Account_Icon.dart';
 import 'Login_Page.dart';
+import 'Edit_profile_page.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final String userName;
   final String? nationalCode;
   final Account account;
@@ -17,6 +19,20 @@ class ProfilePage extends StatelessWidget {
   static const Color kAccent = Color.fromARGB(255, 175, 51, 51);
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late String _userName;
+  String? _imagePath; // saved profile image path (from edit page)
+
+  @override
+  void initState() {
+    super.initState();
+    _userName = widget.userName;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final cardWidth = size.width * 0.92;
@@ -24,8 +40,8 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: const Text('Profile', style: TextStyle(color: Colors.white),),
-        backgroundColor: kAccent,
+        title: const Text('Profile', style: TextStyle(color: Colors.white)),
+        backgroundColor: ProfilePage.kAccent,
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -49,52 +65,70 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _Header(userName: userName, nationalCode: "nationalCode"),
+                  _Header(
+                    userName: _userName,
+                    nationalCode: widget.nationalCode,
+                    imagePath: _imagePath,
+                  ),
                   const SizedBox(height: 18),
 
-                  _SectionTitle(title: "User"),
+                  const _SectionTitle(title: "User"),
                   const SizedBox(height: 10),
-                  _InfoTile(icon: Icons.account_circle, label: "Name", value: "value"),
-                  _InfoTile(icon: Icons.account_box_outlined, label: "LastName", value: "value"),
-                  // _InfoTile(icon: Icons.account_box_outlined, label: "national ID", value: "nationalCode"),
-                  // _InfoTile(icon: Icons.abc, label: "username", value: userName),
+                  const _InfoTile(icon: Icons.account_circle, label: "Name", value: "value"),
+                  const _InfoTile(icon: Icons.account_box_outlined, label: "LastName", value: "value"),
 
                   const SizedBox(height: 18),
-                  _SectionTitle(title: "Account"),
+                  const _SectionTitle(title: "Account"),
                   const SizedBox(height: 10),
 
                   _InfoTile(
                     icon: Icons.account_balance_outlined,
                     label: "Account Number",
-                    value: account.Account_Number,
+                    value: widget.account.Account_Number,
                   ),
                   _InfoTile(
                     icon: Icons.credit_card_outlined,
                     label: "Card Number",
-                    value: _formatCard(account.Card_Number),
+                    value: _formatCard(widget.account.Card_Number),
                   ),
                   _InfoTile(
                     icon: Icons.wallet_outlined,
                     label: "Balance",
-                    value: _formatMoney(account.Balance),
+                    value: _formatMoney(widget.account.Balance),
                   ),
 
-                  // _SectionTitle(title: "Actions"),
                   const SizedBox(height: 10),
 
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Edit Profile - Complete Soon'),
-                            duration: Duration(seconds: 2),
+                      onPressed: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => EditProfilePage(
+                              userName: _userName,
+                              nationalCode: widget.nationalCode,
+                              firstName: "name",
+                              lastName: "last name",
+                              initialImagePath: _imagePath,
+                            ),
                           ),
                         );
+
+                        // expecting: {"userName": "...", "imagePath": "..."}
+                        if (result is Map) {
+                          setState(() {
+                            if (result['userName'] != null) {
+                              _userName = result['userName'];
+                            }
+                            // allow clearing image too
+                            _imagePath = result['imagePath'];
+                          });
+                        }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: kAccent,
+                        backgroundColor: ProfilePage.kAccent,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -102,24 +136,20 @@ class ProfilePage extends StatelessWidget {
                       ),
                       child: const Text(
                         'Edit Profile',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
 
                   const SizedBox(height: 10),
+
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      // onPressed: () {
-                      //   Navigator.pushAndRemoveUntil(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => const LoginPage(),
-                      //     ),
-                      //         (route) => false,
-                      //   );
-                      // },
                       onPressed: () async {
                         final confirm = await showDialog<bool>(
                           context: context,
@@ -147,13 +177,9 @@ class ProfilePage extends StatelessWidget {
                           );
                         }
                       },
-
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: const Color.fromARGB(255, 175, 51, 51),
-                        side: const BorderSide(
-                          color: Color.fromARGB(255, 175, 51, 51),
-                          width: 2,
-                        ),
+                        foregroundColor: ProfilePage.kAccent,
+                        side: const BorderSide(color: ProfilePage.kAccent, width: 2),
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -161,14 +187,10 @@ class ProfilePage extends StatelessWidget {
                       ),
                       child: const Text(
                         'Logout',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
@@ -199,13 +221,20 @@ class ProfilePage extends StatelessWidget {
 class _Header extends StatelessWidget {
   final String userName;
   final String? nationalCode;
+  final String? imagePath;
 
-  const _Header({required this.userName, required this.nationalCode});
+  const _Header({
+    required this.userName,
+    required this.nationalCode,
+    required this.imagePath,
+  });
 
   static const Color kAccent = Color.fromARGB(255, 175, 51, 51);
 
   @override
   Widget build(BuildContext context) {
+    final hasImage = imagePath != null && imagePath!.trim().isNotEmpty;
+
     return Column(
       children: [
         Container(
@@ -214,7 +243,10 @@ class _Header extends StatelessWidget {
           child: CircleAvatar(
             radius: 44,
             backgroundColor: Colors.grey[100],
-            child: Text(
+            backgroundImage: hasImage ? FileImage(File(imagePath!)) : null,
+            child: hasImage
+                ? null
+                : Text(
               _initials(userName),
               style: const TextStyle(
                 fontSize: 26,
@@ -259,19 +291,11 @@ class _SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 10,
-          height: 10,
-          decoration: const BoxDecoration(color: kAccent, shape: BoxShape.circle),
-        ),
+        Container(width: 10, height: 10, decoration: const BoxDecoration(color: kAccent, shape: BoxShape.circle)),
         const SizedBox(width: 10),
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w800,
-            color: kAccent,
-          ),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: kAccent),
         ),
       ],
     );
@@ -305,11 +329,7 @@ class _InfoTile extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(color: Colors.grey[700], fontSize: 12, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 2),
                 Text(

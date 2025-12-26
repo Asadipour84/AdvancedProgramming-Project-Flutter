@@ -18,6 +18,7 @@ class _AdvancedSearchPageState extends State<AdvancedSearchPage> {
   double? _maxAmount;
   DateTime? _fromDate;
   DateTime? _toDate;
+  Categories_Of_Transfer? _selectedCategory;
 
   @override
   void initState() {
@@ -43,7 +44,9 @@ class _AdvancedSearchPageState extends State<AdvancedSearchPage> {
         final matchTo =
             _toDate == null || tx.dateTime.isBefore(_toDate!);
 
-        return matchType && matchMin && matchMax && matchFrom && matchTo;
+        final matchCategory =
+           _selectedCategory == null || tx.categories_of_transfer == _selectedCategory ;
+        return matchType && matchMin && matchMax && matchFrom && matchTo && matchCategory ;
       }).toList();
     });
   }
@@ -77,6 +80,20 @@ class _AdvancedSearchPageState extends State<AdvancedSearchPage> {
             padding: const EdgeInsets.all(12),
             child: Column(
               children: [
+                DropdownButtonFormField<Categories_Of_Transfer>(
+                 value: _selectedCategory,
+                 hint: const Text('Category'),
+                 items: Categories_Of_Transfer.values.map((cat) {
+                 return DropdownMenuItem(
+                 value: cat,
+                 child: Text(cat.name),
+                 );
+                }).toList(),
+                 onChanged: (value) {
+                  setState(() => _selectedCategory = value);
+                },
+                  ),
+                    const SizedBox(height: 10),
                 DropdownButtonFormField<Type_Of_Transfer>(
                   value: _selectedType,
                   hint: const Text('Transaction Type'),
@@ -181,7 +198,7 @@ class _AdvancedSearchPageState extends State<AdvancedSearchPage> {
                         ),
                         title: Text(tx.description),
                         subtitle: Text(
-                            '${tx.dateTime.year}/${tx.dateTime.month}/${tx.dateTime.day}'),
+                            '${tx.dateTime.year}/${tx.dateTime.month}/${tx.dateTime.day} • ${tx.categories_of_transfer.name}'),
                         trailing: Text(
                           tx.amount.toStringAsFixed(0),
                           style: TextStyle(

@@ -1,23 +1,15 @@
+import 'Transfer.dart';
 import 'package:flutter/material.dart';
 import 'Transactions_List_Pages.dart' ;
 import 'Advance_Search_Page.dart' ;
+import 'Transaction_Categories_Page.dart' ;
 class TransferPage extends StatelessWidget {
   const TransferPage({super.key});
-
-  void _showComingSoon(BuildContext context, String title) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$title - Complete Soon'),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transfer', style: TextStyle(color: Colors.white),),
+        title: const Text('Transfer'),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
       ),
       body: Center(
@@ -43,8 +35,9 @@ class TransferPage extends StatelessWidget {
             _TransferIcon(
               icon: Icons.category,
               title: 'Transaction Categories',
-              onTap: () =>
-                  _showComingSoon(context, 'Transaction Categories'),
+              onTap: (){
+                Navigator.push(context , MaterialPageRoute(builder: (context) => TransactionCategoriesPage(transactions: Bank_Transfer.generate_random_transactions()),),);
+              },
             ),
           ],
         ),
