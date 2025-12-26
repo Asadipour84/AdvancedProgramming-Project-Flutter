@@ -10,7 +10,7 @@ class TransactionListPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transactions'),
+        title: const Text('Transactions', style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
       ),
       body: ListView.builder(

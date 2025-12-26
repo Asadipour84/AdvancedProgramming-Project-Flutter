@@ -15,7 +15,7 @@ class TransactionCategoriesPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transaction Categories'),
+        title: const Text('Transaction Categories', style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
       ),
       body: ListView.builder(
@@ -60,7 +60,7 @@ class TransactionListPageFiltered extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transactions: ${category.name}'),
+        title: Text('Transactions: ${category.name}', style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
       ),
       body: filteredTransactions.isEmpty
