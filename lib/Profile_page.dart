@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Account_Icon.dart';
+import 'Login_Page.dart';
 
 class ProfilePage extends StatelessWidget {
   final String userName;
@@ -23,7 +24,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Profile', style: TextStyle(color: Colors.white),),
         backgroundColor: kAccent,
       ),
       body: Center(
@@ -48,9 +49,17 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _Header(userName: userName, nationalCode: nationalCode),
+                  _Header(userName: userName, nationalCode: "nationalCode"),
                   const SizedBox(height: 18),
 
+                  _SectionTitle(title: "User"),
+                  const SizedBox(height: 10),
+                  _InfoTile(icon: Icons.account_circle, label: "Name", value: "value"),
+                  _InfoTile(icon: Icons.account_box_outlined, label: "LastName", value: "value"),
+                  // _InfoTile(icon: Icons.account_box_outlined, label: "national ID", value: "nationalCode"),
+                  // _InfoTile(icon: Icons.abc, label: "username", value: userName),
+
+                  const SizedBox(height: 18),
                   _SectionTitle(title: "Account"),
                   const SizedBox(height: 10),
 
@@ -70,8 +79,7 @@ class ProfilePage extends StatelessWidget {
                     value: _formatMoney(account.Balance),
                   ),
 
-                  const SizedBox(height: 18),
-                  _SectionTitle(title: "Actions"),
+                  // _SectionTitle(title: "Actions"),
                   const SizedBox(height: 10),
 
                   SizedBox(
@@ -94,10 +102,73 @@ class ProfilePage extends StatelessWidget {
                       ),
                       child: const Text(
                         'Edit Profile',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
                   ),
+
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      // onPressed: () {
+                      //   Navigator.pushAndRemoveUntil(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const LoginPage(),
+                      //     ),
+                      //         (route) => false,
+                      //   );
+                      // },
+                      onPressed: () async {
+                        final confirm = await showDialog<bool>(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Logout'),
+                            content: const Text('Are you sure you want to logout?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                child: const Text('Logout'),
+                              ),
+                            ],
+                          ),
+                        );
+
+                        if (confirm == true) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (_) => const LoginPage()),
+                                (route) => false,
+                          );
+                        }
+                      },
+
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: const Color.fromARGB(255, 175, 51, 51),
+                        side: const BorderSide(
+                          color: Color.fromARGB(255, 175, 51, 51),
+                          width: 2,
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+
                 ],
               ),
             ),

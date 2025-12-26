@@ -9,7 +9,7 @@ class TransferPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transfer'),
+        title: const Text('Transfer', style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
       ),
       body: Center(

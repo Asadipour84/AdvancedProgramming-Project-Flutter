@@ -67,7 +67,7 @@ class _AdvancedSearchPageState extends State<AdvancedSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Advanced Search'),
+        title: const Text('Advanced Search', style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
       ),
       body: Column(
