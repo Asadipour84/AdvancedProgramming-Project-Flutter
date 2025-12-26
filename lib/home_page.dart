@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Account_Icon.dart';
 import 'Account_Icon_Page.dart';
+import 'Transfer_Page.dart' ;
 class HomePage extends StatelessWidget {
   final String userName;
   final Account account;
@@ -92,7 +93,9 @@ class HomePage extends StatelessWidget {
                   _QuickIcon(
                     icon: Icons.swap_horiz,
                     title: 'Transfer',
-                    onTap: () => _showComingSoon(context, 'Transfer'),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const TransferPage(),),) ;
+                    },
                   ),
                   _QuickIcon(
                     icon: Icons.payment,
