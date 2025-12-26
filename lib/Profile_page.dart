@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Account_Icon.dart';
 import 'Login_Page.dart';
+import 'Edit_profile_page.dart';
 
 class ProfilePage extends StatelessWidget {
   final String userName;
@@ -85,13 +86,29 @@ class ProfilePage extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Edit Profile - Complete Soon'),
-                            duration: Duration(seconds: 2),
+                      onPressed: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => EditProfilePage(
+                              userName: userName,
+                              nationalCode: nationalCode,
+                              // If you don’t have these values yet, keep them null for now:
+                              firstName: null,
+                              lastName: null,
+                              initialImagePath: null,
+                            ),
                           ),
                         );
+
+                        // result will be a Map like: {"userName": "...", "imagePath": "..."}
+                        // BUT your ProfilePage is StatelessWidget, so you can’t update UI here.
+                        // For now, just show what came back:
+                        if (result != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Saved: ${result['userName']}")),
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: kAccent,
