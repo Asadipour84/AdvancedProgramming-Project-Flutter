@@ -43,6 +43,8 @@ class _AddMemberPageState extends State<AddMemberPage> {
       appBar: AppBar(
         title: const Text('Add Member'),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
+        // backgroundColor: EditProfilePage.kAccent,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -92,7 +94,7 @@ class _AddMemberPageState extends State<AddMemberPage> {
               ),
               child: const Text(
                 'Add Member',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
           ],

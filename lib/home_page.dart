@@ -3,6 +3,7 @@ import 'Account_Icon.dart';
 import 'Account_Icon_Page.dart';
 import 'Transfer_Page.dart' ;
 import 'Profile_page.dart';
+import 'Groups_Page.dart';
 class HomePage extends StatelessWidget {
   final String userName;
   final Account account;
@@ -71,7 +72,9 @@ class HomePage extends StatelessWidget {
                   _QuickIcon(
                     icon: Icons.group,
                     title: 'Groups',
-                    onTap: () => _showComingSoon(context, 'Groups'),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const GroupsPage(),),);
+                    } ,
                   ),
                   _QuickIcon(
                     icon: Icons.settings,

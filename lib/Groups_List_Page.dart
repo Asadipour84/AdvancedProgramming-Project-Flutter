@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Groups.dart';
 import 'Groups_Services.dart';
+import 'Groups_detail_page.dart';
 
 class MyGroupsPage extends StatelessWidget {
   const MyGroupsPage({super.key});
@@ -13,6 +14,7 @@ class MyGroupsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('My Groups'),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
+        foregroundColor: Colors.white,
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
@@ -27,10 +29,10 @@ class MyGroupsPage extends StatelessWidget {
               title: Text(group.name),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('${group.name} selected'),
-                    duration: const Duration(seconds: 1),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => GroupDetailPage(group: group),
                   ),
                 );
               },

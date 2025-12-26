@@ -36,6 +36,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
       appBar: AppBar(
         title: const Text('Create New Group'),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -63,7 +64,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
               ),
               child: const Text(
                 'Create Group',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
           ],
