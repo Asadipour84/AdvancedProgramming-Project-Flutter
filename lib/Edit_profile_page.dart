@@ -278,7 +278,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       child: const Text(
                         "Save",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
                   ),

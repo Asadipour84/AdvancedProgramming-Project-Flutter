@@ -1,4 +1,4 @@
-import 'package:first_part_authentication/Transfer.dart';
+import 'Transfer.dart';
 import 'package:flutter/material.dart';
 import 'Transactions_List_Pages.dart' ;
 import 'Advance_Search_Page.dart' ;
@@ -9,7 +9,7 @@ class TransferPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transfer', style: TextStyle(color: Colors.white),),
+        title: const Text('Transfer'),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
       ),
       body: Center(
