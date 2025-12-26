@@ -1,7 +1,5 @@
 class Groups {
-    List <int> bills ;
-    List <int> rent ;
-    List <int> education ;
-    Groups() :bills = [] , rent = [] , education = [] ;
-    
+    final String name ;
+    final List<String>  members ;
+    Groups({required this.name , List<String>? members}) : members = members ?? [] ;
 }
