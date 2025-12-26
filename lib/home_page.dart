@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Account_Icon.dart';
 import 'Account_Icon_Page.dart';
 import 'Transfer_Page.dart' ;
+import 'Profile_page.dart';
 class HomePage extends StatelessWidget {
   final String userName;
   final Account account;
@@ -48,7 +49,18 @@ class HomePage extends StatelessWidget {
                   _QuickIcon(
                     icon: Icons.person,
                     title: 'Profile',
-                    onTap: () => _showComingSoon(context, 'Profile'),
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(
+                            userName: userName,
+                            account: account,
+                            // nationalCode: ??? (optional, see below)
+                          ),
+                        ),
+                      ),
+                    },
                   ),
                   _QuickIcon(
                     icon: Icons.account_balance,

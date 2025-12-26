@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color.fromARGB(255, 175, 51, 51),
       ),
       debugShowCheckedModeBanner: false,
-      home: Login_Page(),
+      home: const LoginPage(),
     );
   }
 }
