@@ -21,7 +21,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
       return;
     }
 
-    Group_Source.addGroup(name);
+    GroupRepository.addGroup(name);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Group created successfully')),

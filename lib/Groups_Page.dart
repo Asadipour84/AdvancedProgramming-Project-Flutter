@@ -1,10 +1,19 @@
-import 'package:first_part_authentication/Add_Member_Page.dart';
 import 'package:first_part_authentication/Create_Group_Page.dart';
 import 'package:first_part_authentication/Groups_List_Page.dart';
 import 'package:flutter/material.dart';
 
 class GroupsPage extends StatelessWidget {
   const GroupsPage({super.key});
+
+  void _showComingSoon(BuildContext context, String title) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$title - Compelete Soon'),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +44,7 @@ class GroupsPage extends StatelessWidget {
             _GroupIcon(
               icon: Icons.person_add,
               title: 'Add Member',
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const AddMemberPage(),),);
-              },
+              onTap: () => _showComingSoon(context, 'Add Member'),
             ),
           ],
         ),
