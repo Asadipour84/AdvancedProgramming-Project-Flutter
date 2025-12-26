@@ -4,6 +4,7 @@ import 'Account_Icon_Page.dart';
 import 'Transfer_Page.dart' ;
 import 'Profile_page.dart';
 import 'Groups_Page.dart';
+import 'All_Accounts_page.dart';
 class HomePage extends StatelessWidget {
   final String userName;
   final Account account;
@@ -64,7 +65,11 @@ class HomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AccountPage(account: account),
+                          builder: (_) => AllAccountsPage(
+                            firstName: "name",   // replace with real values
+                            lastName: "surname",
+                            // initialAccounts: yourAccountsList, // optional
+                          ),
                         ),
                       );
                     },
