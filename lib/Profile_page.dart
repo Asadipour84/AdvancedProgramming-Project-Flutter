@@ -76,10 +76,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   const _SectionTitle(title: "User"),
                   const SizedBox(height: 10),
                   const _InfoTile(icon: Icons.account_circle, label: "Name", value: "value"),
-                  const _InfoTile(icon: Icons.account_box_outlined, label: "LastName", value: "value"),
+                  const _InfoTile(icon: Icons.perm_identity, label: "LastName", value: "value"),
+                  const _InfoTile(icon: Icons.account_box_outlined, label: "NationalCode", value: "value"),
+                  const _InfoTile(icon: Icons.abc, label: "Username", value: "value"),
 
                   const SizedBox(height: 18),
-                  const _SectionTitle(title: "Account"),
+                  const _SectionTitle(title: "Default Account"),
                   const SizedBox(height: 10),
 
                   _InfoTile(

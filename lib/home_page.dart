@@ -5,6 +5,7 @@ import 'Transfer_Page.dart' ;
 import 'Profile_page.dart';
 import 'Groups_Page.dart';
 import 'All_Accounts_page.dart';
+import 'card_to_card.dart';
 class HomePage extends StatelessWidget {
   final String userName;
   final Account account;
@@ -102,7 +103,10 @@ class HomePage extends StatelessWidget {
                   _QuickIcon(
                     icon: Icons.credit_card,
                     title: 'Card to Card',
-                    onTap: () => _showComingSoon(context, 'Card to Card'),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CardToCard(),),);
+                    }
+                    ,
                   ),
                   _QuickIcon(
                     icon: Icons.swap_horiz,
