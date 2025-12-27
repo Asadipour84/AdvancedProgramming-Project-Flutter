@@ -172,7 +172,7 @@ class _AdvancedSearchPageState extends State<AdvancedSearchPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                   ),
-                  child: const Text('Apply Filters'),
+                  child: const Text('Apply Filters', style: TextStyle(color: Colors.white),),
                 ),
               ],
             ),
