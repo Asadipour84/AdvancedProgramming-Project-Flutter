@@ -13,6 +13,7 @@ class TransactionListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Transactions'),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
+        foregroundColor: Colors.white,
         actions: [
          IconButton(
           icon: const Icon(Icons.download),

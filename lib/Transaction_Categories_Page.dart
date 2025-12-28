@@ -63,6 +63,7 @@ class TransactionListPageFiltered extends StatelessWidget {
       appBar: AppBar(
         title: Text('Transactions: ${category.name}', style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromARGB(255, 175, 51, 51),
+        foregroundColor: Colors.white,
       ),
       body: filteredTransactions.isEmpty
           ? const Center(child: Text('No transactions found'))
